@@ -8,7 +8,7 @@
 <meta property="og:description" content="특허번호나 연구분야로 검색하고 기술요약자료(SMK)를 바로 확인하세요.">
 </head>
 <body>
-<title>선문대 보유특허 기술이전</title>
+<title>선문대학교 특허기술 한눈에 보기</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
@@ -236,7 +236,7 @@ select.sortsel{border:1px solid var(--line);background:transparent;border-radius
 .contact .ci{padding:6px 28px;border-right:1px solid var(--line-soft)}
 .contact .ci:last-child{border-right:0}
 .contact dt{font-size:13px;color:var(--ink-3)}
-.contact dd{margin:4px 0 0;font-size:18px;font-weight:500;letter-spacing:-.014em}
+.contact dd{margin:4px 0 0;font-size:18px;font-weight:500;letter-spacing:-.014em;font-variant-numeric:tabular-nums}
 @media (max-width:620px){.contact .ci{flex:1 0 46%;border-right:0;padding-inline:10px}}
 .copybtn{border:1px solid var(--line);background:transparent;border-radius:980px;padding:2px 10px;font-size:12px;
   cursor:pointer;margin-left:8px;color:var(--ink-2);vertical-align:middle}
@@ -395,15 +395,15 @@ function contactHTML(){
     + '<dl>'
     + '<div class="ci"><dt>기관</dt><dd>'+esc(c.org)+'</dd></div>'
     + '<div class="ci"><dt>담당자</dt><dd>'+esc(c.manager)+'</dd></div>'
-    + '<div class="ci"><dt>연락처</dt><dd class="mono">'+esc(c.tel)+'<button class="copybtn" data-act="copy" data-v="'+esc(c.tel)+'">복사</button></dd></div>'
-    + '<div class="ci"><dt>이메일</dt><dd class="mono">'+esc(c.email)+'<button class="copybtn" data-act="copy" data-v="'+esc(c.email)+'">복사</button></dd></div>'
+    + '<div class="ci"><dt>연락처</dt><dd>'+esc(c.tel)+'<button class="copybtn" data-act="copy" data-v="'+esc(c.tel)+'">복사</button></dd></div>'
+    + '<div class="ci"><dt>이메일</dt><dd>'+esc(c.email)+'<button class="copybtn" data-act="copy" data-v="'+esc(c.email)+'">복사</button></dd></div>'
     + '</dl></div></section>';
 }
 function footHTML(){
   return '<footer class="foot"><div class="wrap">'
     + '<span class="footcol"><span class="footbrand"><img class="logo" src="'+LOGO+'" alt="">'
     + '<span class="brandname">선문대학교 산학협력단</span></span>'
-    + '<span>'+esc(DB.meta.source)+'</span></span>'
+    + '</span>'
     + '<span>최종 갱신 '+esc(DB.meta.updated)+'</span>'
     + '</div></footer>';
 }
@@ -455,7 +455,7 @@ function resultsHTML(){
     + '<div class="resultbar"><span><b>'+rows.length+'</b>건'
     + (groupMode() ? ' · 분야별 최신 '+PER_FIELD+'건씩 표시'
         : rows.length>ui.limit ? ' 중 '+Math.min(ui.limit,rows.length)+'건 표시' : '')+'</span>'
-    + '<span>'+esc(DB.meta.source)+'</span></div>'
+    + '</div>'
     + (rows.length
         ? '<div class="grid">'+gridHTML(groupMode() ? rows : rows.slice(0,ui.limit))+'</div>'
           + (!groupMode() && rows.length > ui.limit
@@ -481,7 +481,7 @@ function listHTML(){
   h += '<section class="sec center"><div class="wrap mid">'
     + '<div class="herobrand"><img class="logo" src="'+LOGO+'" alt="">'
     + '<span class="brandname">선문대학교 산학협력단</span></div>'
-    + '<h1 class="hero-t">보유특허 기술이전</h1>'
+    + '<h1 class="hero-t">선문대학교<br>특허기술 한눈에 보기</h1>'
     + '<p class="hero-s">찾고. 열어보고. 바로 문의하세요.</p>'
     + '<p class="hero-d">특허번호나 연구분야로 검색하면 기술요약자료(SMK)를 그 자리에서 확인할 수 있습니다.</p>'
     + '<div class="ctarow"><button class="btn" data-act="scroll" data-v="search">특허 찾아보기</button>'
@@ -524,7 +524,6 @@ function listHTML(){
       + '<option value="new"'+(ui.sort==='new'?' selected':'')+'>전체 최신순</option>'
       + '<option value="title"'+(ui.sort==='title'?' selected':'')+'>명칭순</option>'
     + '</select></div>'
-    + '<p class="fieldnote">기술 개요·특징·효과·비교표·적용분야와 대표도면은 특허 공보 전문을 근거로 작성·추출했습니다. 시장 동향은 별도 조사분에 한해 표시됩니다. 분야는 산학협력단 보유기술 분류를 따르며, 해당 정보가 없는 건은 명칭 기준 자동 분류입니다.</p>'
     + '</div></section>';
 
   h += '<section class="sec" id="results">' + resultsHTML() + '</section>';
@@ -698,8 +697,8 @@ function showModal(){
     + list
     + '<dl class="spec" style="margin-top:0">'
       + row('담당자', esc(c.manager))
-      + row('연락처','<span class="mono">'+esc(c.tel)+'</span>')
-      + row('이메일','<span class="mono">'+esc(c.email)+'</span>')
+      + row('연락처', esc(c.tel))
+      + row('이메일', esc(c.email))
     + '</dl>'
     + '<div class="modal-actions" style="margin-top:22px">'
       + '<button class="btn sm plain" data-act="copy" data-v="'+esc(c.email)+'">이메일 복사</button>'
